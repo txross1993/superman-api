@@ -53,16 +53,16 @@ func TestSuperman(t *testing.T) {
 				suspiciousPreceding: true,
 				validSubsequent:     true,
 			},
-			expectedFromSupsicious: true,
-			expectedToSupsicious:   false,
+			expectedFromSupsicious: false,
+			expectedToSupsicious:   true,
 		},
 		"Suspicious Subsequent": {
 			testParams: testParams{
 				validPreceding:       true,
 				suspiciousSubsequent: true,
 			},
-			expectedFromSupsicious: false,
-			expectedToSupsicious:   true,
+			expectedFromSupsicious: true,
+			expectedToSupsicious:   false,
 		},
 	}
 
