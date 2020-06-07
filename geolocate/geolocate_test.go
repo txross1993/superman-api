@@ -1,6 +1,8 @@
 package geolocate
 
 import (
+	"path"
+	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -15,8 +17,9 @@ const (
 )
 
 func TestGetCoordinatesByIP(t *testing.T) {
-
-	geoSvc, err := NewGeoService()
+	dir, _ := filepath.Abs(".")
+	geoDb := path.Join(dir, "../GeoLite2-City_20200602/GeoLite2-City.mmdb")
+	geoSvc, err := NewGeoService(geoDb)
 	if err != nil {
 		t.Fatal(err)
 	}
