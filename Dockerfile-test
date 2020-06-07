@@ -1,0 +1,23 @@
+FROM golang:1.14-alpine
+
+RUN apk add --update --no-cache git build-base make
+
+ENV HOST=0.0.0.0
+ENV PORT=8080
+ENV GEODB=./GeoLite2-City_20200602/GeoLite2-City.mmdb
+ENV DBPATH=/local-db
+
+WORKDIR /go/src/github.com/txross1993/superman-api
+
+# Cache dependencies
+ADD vendor vendor
+COPY go.mod .
+COPY go.sum .
+
+RUN go mod download && \
+    go get -u golang.org/x/lint/golint
+
+
+COPY . .
+
+RUN make build-api

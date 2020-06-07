@@ -1,0 +1,21 @@
+version: "3.6"
+
+services:
+  superman-api-test:
+    build:
+      context: ../..
+      dockerfile: Dockerfile-test
+    container_name: superman-api-test
+    command: >
+      /bin/sh -c "
+        make lint && make test
+      "
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8080
+      - GEODB=./GeoLite2-City_20200602/GeoLite2-City.mmdb
+      - DBPATH=/local-db
+      - GODEBUG=gocacheverify=1
+      - GOCACHE=/tmp
+      - CGO_ENABLED=1
+      - GOOS=linux

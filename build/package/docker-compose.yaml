@@ -1,0 +1,22 @@
+version: "3.6"
+
+services:
+  superman-api-builder:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    container_name: superman-api
+    volumes:
+      - ../../local-db:/local-db
+    command: "/app"
+    ports:
+      - "8080:8080"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8080
+      - GEODB=GeoLite2-City.mmdb
+      - DBPATH=/local-db
+      - GODEBUG=gocacheverify=1
+      - GOCACHE=/tmp
+      - CGO_ENABLED=1
+      - GOOS=linux
